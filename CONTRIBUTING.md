@@ -15,6 +15,9 @@ make setup
 make setup-all
 ```
 
+On a bare Debian or Ubuntu system, OpenCV also needs `apt-get install libgl1 libglib2.0-0`. Without it,
+pytest stops at collection with `libGL.so.1: cannot open shared object file`.
+
 `make setup` installs the dev tools and the pre-commit hook. `make setup-all` adds the optional
 extras. `make lint` needs them, because mypy checks the MLflow import.
 
@@ -30,7 +33,8 @@ make build     # wheel and sdist
 ```
 
 The tests use synthetic data and model doubles. They need no GPU or footage. `tests/test_error_handling.py`
-downloads the stock `yolov8n.pt` into the repo root the first time, so that one needs network. Git ignores the file.
+and `tests/test_security.py` download the stock `yolov8n.pt` into the repo root the first time, so those two
+need network. Git ignores the file.
 If you checked something on a real GPU or real footage, say so in the PR. If you could not, say that too.
 
 ## Style

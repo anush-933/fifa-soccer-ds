@@ -13,7 +13,8 @@ pip install git+https://github.com/jayhemnani9910/fifa-soccer-ds
 
 Project page: <https://jayhemnani9910.github.io/fifa-soccer-ds/>
 
-It needs Python 3.12. The default install pulls the GPU build of PyTorch, which is several GB.
+It needs Python 3.12. The default install pulls the GPU build of PyTorch, and took 5.5 GB in a clean
+container. On a bare Debian or Ubuntu system, OpenCV also needs `apt-get install libgl1 libglib2.0-0`.
 
 ## Usage
 
