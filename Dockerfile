@@ -37,7 +37,7 @@ COPY configs/ ./configs/
 # Install the officially paired PyTorch 2.13 / torchvision 0.28 CUDA 12.6
 # wheels first. The project install then reuses this exact local-version build.
 RUN python -m pip install --upgrade \
-        "pip==26.1.2" "setuptools==83.0.0" "wheel==0.47.0" \
+        "pip==26.2" "setuptools==84.2.1" "wheel==0.47.0" \
     && python -m pip install \
         --index-url https://download.pytorch.org/whl/cu126 \
         "torch==2.13.0" "torchvision==0.28.0" \

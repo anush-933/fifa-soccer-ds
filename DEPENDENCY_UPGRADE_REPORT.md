@@ -307,3 +307,10 @@ run were not attempted because they require a large image/toolchain fetch; no su
 5. Add routine container rebuild/scan policy and an OS-package snapshot strategy.
 6. Re-evaluate DVC only after DiskCache publishes a fixed release or after explicit operational risk
    acceptance; do not silently restore it to broad developer/CI environments.
+
+## 2026-11-05 security pin update
+
+`pip-audit --local` failed CI on the pins above, so these moved to the versions that clear the
+reported advisories: aiohttp 3.14.4, Pillow 13.0.0, cryptography 50.0.2, mlflow 3.17.2, pip 26.2,
+setuptools 84.2.1. Checked on Python 3.12 with CPU torch and all extras: `pip check`, `pip-audit
+--local`, ruff, mypy, pre-commit, pytest (264 passed), and `python -m build` all pass.

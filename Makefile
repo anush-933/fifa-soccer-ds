@@ -9,7 +9,7 @@ CHECK_PATHS := src tests scripts
 .PHONY: setup setup-all build check lint test test-cov smoke run run-detect run-live run-pipeline fmt lint-all export trt clean
 
 setup:
-	$(PIP) install --upgrade "pip==26.1.2" "setuptools==83.0.0" "wheel==0.47.0"
+	$(PIP) install --upgrade "pip==26.2" "setuptools==84.2.1" "wheel==0.47.0"
 	$(PIP) install -e ".[dev]"
 	$(PYTHON) -m pre_commit install
 
