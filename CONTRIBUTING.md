@@ -35,6 +35,8 @@ make build     # wheel and sdist
 The tests use synthetic data and model doubles. They need no GPU or footage. `tests/test_error_handling.py`
 and `tests/test_security.py` download the stock `yolov8n.pt` into the repo root the first time, so those two
 need network. Git ignores the file.
+Run them as a normal user. As root, `test_output_directory_creation_failure` fails, because it
+expects `/root` to be unwritable.
 If you checked something on a real GPU or real footage, say so in the PR. If you could not, say that too.
 
 ## Style
