@@ -29,7 +29,8 @@ make lint-all  # every pre-commit hook
 make build     # wheel and sdist
 ```
 
-The tests use synthetic data and model doubles. They need no GPU, checkpoint or footage.
+The tests use synthetic data and model doubles. They need no GPU or footage. `tests/test_error_handling.py`
+downloads the stock `yolov8n.pt` into the repo root the first time, so that one needs network. Git ignores the file.
 If you checked something on a real GPU or real footage, say so in the PR. If you could not, say that too.
 
 ## Style
