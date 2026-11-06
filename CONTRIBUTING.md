@@ -1,61 +1,63 @@
 # Contributing
 
-## Development setup
+I try to reply to issues within a few days.
 
-The project supports CPython `>=3.12,<3.13`. `pyproject.toml` is the dependency source of truth;
-`requirements.txt` is an editable development-install wrapper.
+## Setup
+
+You need Python 3.12 (`>=3.12,<3.13`). `pyproject.toml` is the only place dependencies are declared.
 
 ```bash
+git clone https://github.com/jayhemnani9910/fifa-soccer-ds
+cd fifa-soccer-ds
 python3.12 -m venv .venv
 source .venv/bin/activate
 make setup
-```
-
-Install optional integrations only when the work needs them:
-
-```bash
 make setup-all
 ```
 
-## Quality gates
+On a bare Debian or Ubuntu system, OpenCV also needs `apt-get install libgl1 libglib2.0-0`. Without it,
+pytest stops at collection with `libGL.so.1: cannot open shared object file`.
 
-Ruff provides linting, import sorting, and formatting. Mypy checks first-party source. Pytest and
-coverage provide the test gates.
+`make setup` installs the dev tools and the pre-commit hook. `make setup-all` adds the optional
+extras. `make lint` needs them, because mypy checks the MLflow import.
+
+## Tests and checks
 
 ```bash
-make fmt       # intentionally rewrite lint/format issues
-make lint      # Ruff lint + format check + mypy
-make test      # complete test suite
-make test-cov  # branch coverage
-make lint-all  # pre-commit against all tracked files
-make build     # wheel and source distribution
+make test      # all tests
+make smoke     # the quick ones
+make test-cov  # with branch coverage
+make lint      # ruff, format check, mypy
+make lint-all  # every pre-commit hook
+make build     # wheel and sdist
 ```
 
-Do not mark a network, GPU, external-service, or real-model test as passing unless it ran in that
-environment. Keep unavailable checks explicit in the PR description.
+The tests use synthetic data and model doubles. They need no GPU or footage. `tests/test_error_handling.py`
+and `tests/test_security.py` download the stock `yolov8n.pt` into the repo root the first time, so those two
+need network. Git ignores the file.
+Run them as a normal user. As root, `test_output_directory_creation_failure` fails, because it
+expects `/root` to be unwritable.
+If you checked something on a real GPU or real footage, say so in the PR. If you could not, say that too.
 
-## Change guidelines
+## Style
 
-1. Branch from the repository's current default branch.
-2. Keep changes focused and preserve unrelated work in a dirty worktree.
-3. Add a focused regression test for each correctness or security fix.
-4. Do not weaken validation, typing, or assertions to make a gate green.
-5. Treat model checkpoints and PyG/PyTorch datasets as untrusted serialized input.
-6. Do not commit credentials, private media, datasets, model weights, experiment stores, or build output.
-7. Update documentation when behavior, configuration, dependencies, or compatibility changes.
-8. Record migrations for intentional public behavior changes.
+Ruff handles lint, imports and formatting. `make fmt` rewrites what it can. Lines are 100 characters.
 
-Conventional Commit prefixes (`feat:`, `fix:`, `test:`, `docs:`, `chore:`) are encouraged. Open
-the pull request against the current default branch and complete `.github/PULL_REQUEST_TEMPLATE.md`.
+- Add a regression test with every bug or security fix.
+- Don't weaken validation, types or assertions to get a check to pass.
+- Treat checkpoints and PyG/PyTorch datasets as untrusted, since they can hold pickle payloads.
+- Don't commit credentials, private media, datasets, weights or build output.
+- Update the docs when behavior, config or dependencies change.
+- Upgrade tied packages together: PyTorch, TorchVision, PyG and CUDA; ONNX Runtime; NumPy, SciPy,
+  scikit-learn and OpenCV; FastAPI, Starlette and Pydantic. Record it in
+  [DEPENDENCY_UPGRADE_REPORT.md](DEPENDENCY_UPGRADE_REPORT.md).
 
-## Dependency changes
+## Branches and PRs
 
-Dependency upgrades require current official release/compatibility evidence. Coordinate tightly
-coupled groups—especially Python packaging tools, PyTorch/TorchVision/PyG/CUDA, ONNX Runtime,
-NumPy/SciPy/scikit-learn/OpenCV, and FastAPI/Starlette/Pydantic. Update the dependency report when
-the recommended compatibility target changes.
+Branch from `master` and open the PR against `master`. Keep it to one change. Commit messages use
+Conventional Commits (`feat:`, `fix:`, `test:`, `docs:`, `chore:`). Fill in the PR template.
 
-## Reporting bugs and vulnerabilities
+## Bugs
 
-Public bugs may use GitHub Issues. Security vulnerabilities must follow [SECURITY.md](SECURITY.md)
-and must not be disclosed in a public issue.
+Open an issue with the command you ran, what you expected, what happened, and your Python version
+and OS. Security problems go through [SECURITY.md](SECURITY.md), not a public issue.
