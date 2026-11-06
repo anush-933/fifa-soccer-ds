@@ -9,7 +9,7 @@ pip install git+https://github.com/jayhemnani9910/fifa-soccer-ds
 ```
 
 [![CI](https://github.com/jayhemnani9910/fifa-soccer-ds/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/jayhemnani9910/fifa-soccer-ds/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 
 Project page: <https://jayhemnani9910.github.io/fifa-soccer-ds/>
 
@@ -222,11 +222,11 @@ not a public issue.
 
 ## License and credits
 
-The code is [MIT](LICENSE). It depends on [Ultralytics](https://github.com/ultralytics/ultralytics),
-which is AGPL-3.0, so check what that means for you before distributing or hosting this. The MIT
-license gives no rights to third-party footage, datasets, model weights or logos.
+Copyright (C) 2026 Jay Hemnani. The code is licensed under the [GNU AGPL v3.0](LICENSE), because it
+depends on [Ultralytics](https://github.com/ultralytics/ultralytics), which is AGPL-3.0. The license
+gives no rights to third-party footage, datasets, model weights or logos.
 
-`docs/demo.gif` is CC BY-SA 4.0, not MIT. It is made from
+`docs/demo.gif` is CC BY-SA 4.0, not AGPL. It is made from
 [a clip of ACBB v. Olympique Adamois](https://commons.wikimedia.org/wiki/File:ACBB_v._Olympique_Adamois_(R%C3%A9gional_2_-_Ligue_Paris-Ile-de-France)_-_12%C3%A8me_journ%C3%A9e_-_Stade_Alphonse_Le_Gallo_(Boulogne-Billancourt,_FR92)_-_11-02-2024_85.webm)
 by Manchesterunited1234, trimmed and scaled, with the pipeline's boxes drawn on and terminal cards
 added.
